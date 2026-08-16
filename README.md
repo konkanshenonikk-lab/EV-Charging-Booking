@@ -35,16 +35,16 @@ The application allows users to:
 - REST APIs
 - JSON
 
-## Project Structure
+ Project Structure
 
 ```text
-EV project2
-│
-├── index.html
-├── style.css
-├── script.js
-├── server.js
-├── data.json
-├── package.json
-├── package-lock.json
-└── README.md
+ EV project2
+
+- index.html
+- style.css
+- script.js
+- server.js
+- data.json
+- package.json
+- package-lock.json
+- README.md
