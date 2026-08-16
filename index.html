@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Charge Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>⚡ EV Charge Finder</h1>
+    <p>Find a charging station and book your charging slot</p>
+</header>
+
+<nav>
+    <button onclick="showSection('stationsSection')">Stations</button>
+    <button onclick="showSection('bookingSection')">Book Charging</button>
+    <button onclick="showSection('bookingsSection')">My Bookings</button>
+</nav>
+
+<main>
+
+    <section id="message"></section>
+
+    
+    <section id="stationsSection" class="section">
+        <h2>Charging Stations</h2>
+
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="Search station or location">
+            <select id="typeFilter">
+                <option value="">All Charging Types</option>
+                <option value="AC Charging">AC Charging</option>
+                <option value="Fast Charging">Fast Charging</option>
+                <option value="DC Fast Charging">DC Fast Charging</option>
+            </select>
+            <select id="availabilityFilter">
+                <option value="">All Availability</option>
+                <option value="Available">Available</option>
+                <option value="Busy">Busy</option>
+            </select>
+        </div>
+
+        <div id="stationList" class="card-container"></div>
+    </section>
+
+    
+    <section id="bookingSection" class="section hidden">
+        <h2>Book a Charging Slot</h2>
+
+        <form id="bookingForm">
+
+            <label>Your Name</label>
+            <input type="text" id="userName" required>
+
+            <label>Contact Number</label>
+            <input type="tel" id="contact" required>
+
+            <label>Charging Station</label>
+            <select id="stationId" required>
+                <option value="">Select a station</option>
+            </select>
+
+            <label>Date</label>
+            <input type="date" id="date" required>
+
+            <label>Time</label>
+            <input type="time" id="time" required>
+
+            <label>Vehicle</label>
+            <input type="text" id="vehicle" placeholder="Example: Tata Nexon EV" required>
+
+            <label>Number of vehicles</label>
+            <input type="number" id="visitors" min="1" value="1">
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+    </section>
+
+    
+    <section id="bookingsSection" class="section hidden">
+        <h2>My Bookings</h2>
+        <div id="bookingList" class="card-container"></div>
+    </section>
+
+</main>
+
+<footer>
+    <p>EV Charge Finder | Full Stack Development Capstone</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

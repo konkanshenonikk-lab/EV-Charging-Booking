@@ -1,0 +1,128 @@
+{
+  "stations": [
+    {
+      "id": 1,
+      "name": "GreenCharge Hub",
+      "location": "Mangalore",
+      "address": "MG Road, Mangalore",
+      "chargingType": "Fast Charging",
+      "availability": "Available",
+      "operatingHours": "6:00 AM - 10:00 PM",
+      "contact": "9876543210"
+    },
+    {
+      "id": 2,
+      "name": "EV Power Station",
+      "location": "Bangalore",
+      "address": "Whitefield Main Road, Bangalore",
+      "chargingType": "DC Fast Charging",
+      "availability": "Busy",
+      "operatingHours": "24 Hours",
+      "contact": "9876501234"
+    },
+    {
+      "id": 3,
+      "name": "EcoCharge Point",
+      "location": "Mysore",
+      "address": "KRS Road, Mysore",
+      "chargingType": "AC Charging",
+      "availability": "Busy",
+      "operatingHours": "7:00 AM - 9:00 PM",
+      "contact": "9876512345"
+    },
+    {
+      "id": 4,
+      "name": "Volt Station",
+      "location": "Udupi",
+      "address": "Manipal Road, Udupi",
+      "chargingType": "Fast Charging",
+      "availability": "Available",
+      "operatingHours": "6:00 AM - 11:00 PM",
+      "contact": "9876523456"
+    },
+    {
+      "id": 5,
+      "name": "NEXY EV Station",
+      "location": "KODAGU",
+      "address": "Somvarpet",
+      "chargingType": "Fast DC",
+      "availability": "Available",
+      "operatingHours": "8:00 AM - 10:00 PM",
+      "contact": "987655098"
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "userName": "Nidesh",
+      "contact": "9876543700",
+      "stationId": 1,
+      "stationName": "GreenCharge Hub",
+      "date": "2026-08-29",
+      "time": "11:46",
+      "vehicle": "Tata harrier EV",
+      "visitors": 1,
+      "status": "Cancelled"
+    },
+    {
+      "id": 2,
+      "userName": "Nikhil",
+      "contact": "9890798687",
+      "stationId": 1,
+      "stationName": "GreenCharge Hub",
+      "date": "2026-08-17",
+      "time": "06:30",
+      "vehicle": "OLECTRA SCOOTY",
+      "visitors": 1,
+      "status": "Cancelled"
+    },
+    {
+      "id": 3,
+      "userName": "Nidhish",
+      "contact": "9876543210",
+      "stationId": 1,
+      "stationName": "GreenCharge Hub",
+      "date": "2026-08-20",
+      "time": "10:00",
+      "vehicle": "Tata Nexon EV",
+      "visitors": 1,
+      "status": "Cancelled"
+    },
+    {
+      "id": 4,
+      "userName": "Nidhish",
+      "contact": "9876543259",
+      "stationId": 1,
+      "stationName": "GreenCharge Hub",
+      "date": "2026-08-22",
+      "time": "11:00",
+      "vehicle": "Tata Punch EV",
+      "visitors": 1,
+      "status": "Confirmed"
+    },
+    {
+      "id": 5,
+      "userName": "Nikhil",
+      "contact": "9890798999",
+      "stationId": 5,
+      "stationName": "NEXY EV Station",
+      "date": "2026-09-22",
+      "time": "03:45",
+      "vehicle": "Honda Electra",
+      "visitors": 1,
+      "status": "Confirmed"
+    },
+    {
+      "id": 6,
+      "userName": "Nidhish",
+      "contact": "9876543200",
+      "stationId": 1,
+      "stationName": "GreenCharge Hub",
+      "date": "2026-08-29",
+      "time": "11:40",
+      "vehicle": "Tata Punch EV",
+      "visitors": 1,
+      "status": "Confirmed"
+    }
+  ]
+}
