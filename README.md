@@ -308,14 +308,14 @@ Project Structure
 
 EV-Charging-Booking/
 │
-├── data.json
-├── index.html
-├── script.js
-├── style.css
-├── server.js
-├── package.json
-├── package-lock.json
-└── README.md
+├── data.json 
+├── index.html 
+├── script.js 
+├── style.css 
+├── server.js 
+├── package.json 
+├── package-lock.json 
+└── README.md 
 
 File Description
 
