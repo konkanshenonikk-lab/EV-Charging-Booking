@@ -1,10 +1,10 @@
 # EV Charging Booking
 
-A simple EV Charging Station Booking web app built with HTML, CSS, JavaScript, Node.js and Express.
+A full-stack web app for finding EV charging stations and booking a charging slot — built with a Node.js/Express backend and a plain HTML/CSS/JS frontend.
 
 - No authentication — no login, no JWT, no password system.
-- Data stored in `data.json`, served through a REST API.
-- Pure REST: GET, POST, PUT, DELETE for stations and bookings.
+- Data lives in `data.json` on the backend, served through a REST API.
+- Pure REST: GET, POST, PUT, DELETE for both stations and bookings.
 
 ## Features
 
@@ -30,7 +30,10 @@ A simple EV Charging Station Booking web app built with HTML, CSS, JavaScript, N
 
 ## How to Run
 
+**1. Start the backend**
+
 ```bash
+cd backend
 npm install
 node server.js
 ```
@@ -47,11 +50,9 @@ You should see:
 EV Charging Booking Server running on http://localhost:3000
 ```
 
-Then open your browser at:
+**2. Open the frontend**
 
-```
-http://localhost:3000
-```
+Open `frontend/index.html` directly in your browser (double-click it, or use VS Code's "Open with Live Server"). It calls the backend at `http://localhost:3000`, so make sure the backend is running first. CORS is already enabled, so this works even though the frontend and backend are on different origins/ports.
 
 ## Data Models
 
@@ -60,14 +61,13 @@ http://localhost:3000
 ```json
 {
   "id": 1,
-  "name": "City EV Charging Hub",
+  "name": "GreenCharge Hub",
   "location": "Mangalore",
-  "distance": 2.5,
-  "totalChargers": 6,
-  "availableChargers": 4,
-  "chargingType": "DC Fast",
-  "pricePerKwh": 15,
-  "status": "Available"
+  "address": "MG Road, Mangalore",
+  "chargingType": "Fast Charging",
+  "availability": "Available",
+  "operatingHours": "6:00 AM - 10:00 PM",
+  "contact": "9876543210"
 }
 ```
 
@@ -75,12 +75,15 @@ http://localhost:3000
 
 ```json
 {
-  "id": 1,
+  "id": 3,
+  "userName": "Nidhish",
+  "contact": "9876543210",
   "stationId": 1,
-  "chargerNumber": 2,
+  "stationName": "GreenCharge Hub",
   "date": "2026-08-20",
-  "time": "10:30",
-  "userName": "Test User",
+  "time": "10:00",
+  "vehicle": "Tata Nexon EV",
+  "visitors": 1,
   "status": "Confirmed"
 }
 ```
@@ -113,12 +116,11 @@ Base URL: `http://localhost:3000`
 {
   "name": "New EV Station",
   "location": "Mangalore",
-  "distance": 3.2,
-  "totalChargers": 4,
-  "availableChargers": 3,
-  "chargingType": "AC",
-  "pricePerKwh": 12,
-  "status": "Available"
+  "address": "MG Road, Mangalore",
+  "chargingType": "Fast Charging",
+  "availability": "Available",
+  "operatingHours": "6:00 AM - 10:00 PM",
+  "contact": "9876543210"
 }
 ```
 
@@ -126,17 +128,32 @@ Base URL: `http://localhost:3000`
 
 **4. PUT (update) a station**
 - Method: `PUT`
-- URL: `/api/stations/1`
-- Body → raw → JSON:
+- URL: `/api/stations/2`
+- Body → raw → JSON (send only the fields you want to change):
 
 ```json
 {
-  "availableChargers": 2,
-  "status": "Busy"
+  "availability": "Busy"
 }
 ```
 
-- Response: `200 OK` — the updated station
+- Response: `200 OK`
+
+```json
+{
+  "message": "Station updated successfully",
+  "station": {
+    "id": 2,
+    "name": "EV Power Station",
+    "location": "Bangalore",
+    "address": "Whitefield Main Road, Bangalore",
+    "chargingType": "DC Fast Charging",
+    "availability": "Busy",
+    "operatingHours": "24 Hours",
+    "contact": "9876501234"
+  }
+}
+```
 
 **5. DELETE a station**
 - Method: `DELETE`
@@ -150,7 +167,36 @@ Base URL: `http://localhost:3000`
 - Method: `GET`
 - URL: `/api/bookings`
 - Body: none
-- Response: `200 OK` — JSON array of all bookings
+- Response: `200 OK`
+
+```json
+[
+  {
+    "id": 1,
+    "userName": "Nikhil",
+    "contact": "9090798687",
+    "stationId": 1,
+    "stationName": "GreenCharge Hub",
+    "date": "2026-08-17",
+    "time": "05:30",
+    "vehicle": "OLECTRA SCOOTY",
+    "visitors": 1,
+    "status": "Cancelled"
+  },
+  {
+    "id": 2,
+    "userName": "Nikhil",
+    "contact": "9090798687",
+    "stationId": 1,
+    "stationName": "GreenCharge Hub",
+    "date": "2026-08-17",
+    "time": "06:30",
+    "vehicle": "OLECTRA SCOOTY",
+    "visitors": 1,
+    "status": "Cancelled"
+  }
+]
+```
 
 **7. POST a new booking**
 - Method: `POST`
@@ -159,35 +205,99 @@ Base URL: `http://localhost:3000`
 
 ```json
 {
+  "userName": "Nidhish",
+  "contact": "9876543210",
   "stationId": 1,
-  "chargerNumber": 2,
   "date": "2026-08-20",
-  "time": "10:30",
-  "userName": "Test User"
+  "time": "10:00",
+  "vehicle": "Tata Nexon EV",
+  "visitors": 1
 }
 ```
 
 - Response: `201 Created`
 
+```json
+{
+  "message": "Booking created successfully",
+  "booking": {
+    "id": 3,
+    "userName": "Nidhish",
+    "contact": "9876543210",
+    "stationId": 1,
+    "stationName": "GreenCharge Hub",
+    "date": "2026-08-20",
+    "time": "10:00",
+    "vehicle": "Tata Nexon EV",
+    "visitors": 1,
+    "status": "Confirmed"
+  }
+}
+```
+
 **8. PUT (update) a booking**
 - Method: `PUT`
-- URL: `/api/bookings/1`
+- URL: `/api/bookings/4`
 - Body → raw → JSON:
 
 ```json
 {
-  "time": "12:30",
+  "userName": "Nidhish",
+  "contact": "9876543259",
+  "stationId": 1,
+  "date": "2026-08-22",
+  "time": "11:00",
+  "vehicle": "Tata Punch EV",
+  "visitors": 1,
   "status": "Confirmed"
 }
 ```
 
-- Response: `200 OK` — the updated booking
+- Response: `200 OK`
+
+```json
+{
+  "message": "Booking updated successfully",
+  "booking": {
+    "id": 4,
+    "userName": "Nidhish",
+    "contact": "9876543259",
+    "stationId": 1,
+    "stationName": "GreenCharge Hub",
+    "date": "2026-08-22",
+    "time": "11:00",
+    "vehicle": "Tata Punch EV",
+    "visitors": 1,
+    "status": "Confirmed"
+  }
+}
+```
 
 **9. DELETE a booking**
 - Method: `DELETE`
-- URL: `/api/bookings/1`
+- URL: `/api/bookings/3`
 - Body: none
 - Response: `200 OK`
+
+```json
+{
+  "message": "Booking cancelled successfully",
+  "booking": {
+    "id": 3,
+    "userName": "Nidhish",
+    "contact": "9876543210",
+    "stationId": 1,
+    "stationName": "GreenCharge Hub",
+    "date": "2026-08-20",
+    "time": "10:00",
+    "vehicle": "Tata Nexon EV",
+    "visitors": 1,
+    "status": "Cancelled"
+  }
+}
+```
+
+> Note: this doesn't remove the booking from `data.json` — it flips `status` to `"Cancelled"` and returns the updated record.
 
 ## Testing in Postman
 
@@ -210,13 +320,15 @@ Base URL: `http://localhost:3000`
 
 ```
 EV-Charging-Booking/
-├── data.json
-├── index.html
-├── script.js
-├── style.css
-├── server.js
-├── package.json
-├── package-lock.json
+├── backend/
+│   ├── server.js
+│   ├── data.json
+│   ├── package.json
+│   └── package-lock.json
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 └── README.md
 ```
 
@@ -224,14 +336,14 @@ EV-Charging-Booking/
 
 | File | Description |
 |------|--------------|
-| `index.html` | Frontend structure of the EV Charging Booking application |
-| `style.css` | Styling and layout of the website |
-| `script.js` | Frontend JavaScript functionality and communication with the backend API |
-| `server.js` | Runs the Node.js/Express server and provides the REST API |
-| `data.json` | Project data used by the application |
-| `package.json` | Project information and required Node.js dependencies |
+| `frontend/index.html` | Frontend structure of the EV Charging Booking application |
+| `frontend/style.css` | Styling and layout of the website |
+| `frontend/script.js` | Frontend JavaScript functionality and communication with the backend API |
+| `backend/server.js` | Runs the Node.js/Express server and provides the REST API |
+| `backend/data.json` | Project data used by the application |
+| `backend/package.json` | Project information and required Node.js dependencies |
 | `README.md` | Project documentation and API usage instructions |
 
 ## Conclusion
 
-The EV Charging Booking project provides a simple web-based solution for viewing charging stations and managing EV charging bookings. It demonstrates frontend development, backend REST APIs, CRUD operations, and basic data management using Node.js and Express.
+EV Charging Booking is a small full-stack project for browsing charging stations and booking a slot — built to practice a real frontend-to-backend flow, REST API design, and CRUD operations with Node.js and Express.
