@@ -52,7 +52,7 @@ EV Charging Booking Server running on http://localhost:3000
 
 **2. Open the frontend**
 
-Open `frontend/index.html` directly in your browser (double-click it, or use VS Code's "Open with Live Server"). It calls the backend at `http://localhost:3000`, so make sure the backend is running first. CORS is already enabled, so this works even though the frontend and backend are on different origins/ports.
+Open `frontend/index.html` directly in your browser (double-click it, or use VS Code's "Open with Live Server"). It calls the backend at `http://localhost:3000`, so make sure the backend is running first.
 
 ## Data Models
 
@@ -314,8 +314,9 @@ Base URL: `http://localhost:3000`
 | 201  | Resource created successfully |
 | 400  | Invalid input |
 | 404  | Station or booking not found |
+| 409  | Charging station is currently unavailable |
 | 500  | Internal server error |
-
+ 
 ## Project Structure
 
 ```
